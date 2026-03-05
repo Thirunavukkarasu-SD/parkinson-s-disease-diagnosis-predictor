@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Parkinson's Diagnosis Predictor</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>Auto-Fill</h2>
+      <button type="button" onclick="fillDummy('positive')">Fill Positive</button>
+      <button type="button" onclick="fillDummy('negative')">Fill Negative</button>
+      <button type="button" onclick="fillRandom()">Fill Random</button>
+      <button type="button" onclick="toggleTheme()">Toggle Theme</button>
+    </aside>
+
+    <!-- Main Form -->
+  <main class="main-content">
+      <h1>Parkinson's Diagnosis Predictor</h1>
+      <div class="form-card" role="region" aria-labelledby="formTitle">
+        <form id="diagnosisForm" method="POST" action="/" aria-describedby="formDescription">
+          <h2 id="formTitle" class="sr-only">Diagnosis Form</h2>
+          <p id="formDescription" class="sr-only">Fill in the form below to predict Parkinson's diagnosis.</p>
+          <fieldset>
+            <legend>Patient Information</legend>
+            <div class="form-grid">
+              <div>
+                <label for="Age">Age</label>
+                <input type="number" id="Age" name="Age" required />
+              </div>
+              <div>
+                <label for="Gender">Gender</label>
+                <select id="Gender" name="Gender">
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="Ethnicity">Ethnicity</label>
+                <select id="Ethnicity" name="Ethnicity">
+                  <option value="White">White</option>
+                  <option value="Black">Black</option>
+                  <option value="Asian">Asian</option>
+                  <option value="Hispanic">Hispanic</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="EducationLevel">Education Level</label>
+                <select id="EducationLevel" name="EducationLevel">
+                  <option value="HighSchool">HighSchool</option>
+                  <option value="Bachelors">Bachelors</option>
+                  <option value="Masters">Masters</option>
+                  <option value="PhD">PhD</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="BMI">BMI</label>
+                <input type="number" step="0.1" id="BMI" name="BMI" required />
+              </div>
+          <div>
+            <label for="Smoking">Smoking</label>
+            <select id="Smoking" name="Smoking" required>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div>
+            <label for="AlcoholConsumption">Alcohol Consumption</label>
+            <select id="AlcoholConsumption" name="AlcoholConsumption" required>
+              <option value="None">None</option>
+              <option value="Low">Low</option>
+              <option value="Moderate">Moderate</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+          <div>
+            <label for="PhysicalActivity">Physical Activity</label>
+            <select id="PhysicalActivity" name="PhysicalActivity" required>
+              <option value="Low">Low</option>
+              <option value="Moderate">Moderate</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+          <div>
+            <label for="DietQuality">Diet Quality</label>
+            <select id="DietQuality" name="DietQuality" required>
+              <option value="Poor">Poor</option>
+              <option value="Average">Average</option>
+              <option value="Good">Good</option>
+            </select>
+          </div>
+          <div>
+            <label for="SleepQuality">Sleep Quality</label>
+            <select id="SleepQuality" name="SleepQuality" required>
+              <option value="Poor">Poor</option>
+              <option value="Average">Average</option>
+              <option value="Good">Good</option>
+            </select>
+          </div>
+          <div>
+            <label for="FamilyHistoryParkinsons">Family History Parkinsons</label>
+            <select id="FamilyHistoryParkinsons" name="FamilyHistoryParkinsons" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          <div>
+            <label for="TraumaticBrainInjury">Traumatic Brain Injury</label>
+            <select id="TraumaticBrainInjury" name="TraumaticBrainInjury" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          <div>
+            <label for="Hypertension">Hypertension</label>
+            <select id="Hypertension" name="Hypertension" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          <div>
+            <label for="Diabetes">Diabetes</label>
+            <select id="Diabetes" name="Diabetes" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          <div>
+            <label for="Depression">Depression</label>
+            <select id="Depression" name="Depression" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          <div>
+            <label for="Stroke">Stroke</label>
+            <select id="Stroke" name="Stroke" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          <div>
+            <label for="CholesterolTriglycerides">Cholesterol Triglycerides</label>
+            <input type="number" step="0.1" id="CholesterolTriglycerides" name="CholesterolTriglycerides" required />
+          </div>
+          <div>
+            <label for="UPDRS">UPDRS</label>
+            <input type="number" step="0.1" id="UPDRS" name="UPDRS" required />
+          </div>
+          <div>
+            <label for="MoCA">MoCA</label>
+            <input type="number" step="0.1" id="MoCA" name="MoCA" required />
+          </div>
+          <div>
+            <label for="FunctionalAssessment">Functional Assessment</label>
+            <input type="number" step="0.1" id="FunctionalAssessment" name="FunctionalAssessment" required />
+          </div>
+          <div>
+            <label for="Tremor">Tremor</label>
+            <select id="Tremor" name="Tremor" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          <div>
+            <label for="Rigidity">Rigidity</label>
+            <select id="Rigidity" name="Rigidity" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          <div>
+            <label for="Bradykinesia">Bradykinesia</label>
+            <select id="Bradykinesia" name="Bradykinesia" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          <div>
+            <label for="PosturalInstability">Postural Instability</label>
+            <select id="PosturalInstability" name="PosturalInstability" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          <div>
+            <label for="SpeechProblems">Speech Problems</label>
+            <select id="SpeechProblems" name="SpeechProblems" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          <div>
+            <label for="SleepDisorders">Sleep Disorders</label>
+            <select id="SleepDisorders" name="SleepDisorders" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          <div>
+            <label for="Constipation">Constipation</label>
+            <select id="Constipation" name="Constipation" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          <div>
+            <label for="BP_Diff">BP Diff</label>
+            <input type="number" step="0.1" id="BP_Diff" name="BP_Diff" required />
+          </div>
+          <div>
+            <label for="Cholesterol_Ratio">Cholesterol Ratio</label>
+            <input type="number" step="0.1" id="Cholesterol_Ratio" name="Cholesterol_Ratio" required />
+          </div>
+          <div>
+            <label for="LDL_to_HDL">LDL to HDL</label>
+            <input type="number" step="0.1" id="LDL_to_HDL" name="LDL_to_HDL" required />
+          </div>
+            </div>
+          </fieldset>
+          <button type="submit">Predict</button>
+        </form>
+      </div>
+      {% if prediction %}
+      <div class="prediction-result" role="alert" aria-live="polite">
+        <h2>Prediction Result:</h2>
+        <p>{{ prediction }}</p>
+      </div>
+      {% endif %}
+    </main>
+  </div>
+
+  <script>
+    function fillDummy(type) {
+      const values = {
+        positive: {
+          Age: 73, Gender: 'Male', Ethnicity: 'White', EducationLevel: 'Bachelors',
+          BMI: 31, Smoking: 'Yes', AlcoholConsumption: 'High',
+          PhysicalActivity: 'Moderate', DietQuality: 'Good', SleepQuality: 'Poor',
+          FamilyHistoryParkinsons: '1', TraumaticBrainInjury: '0', Hypertension: '1',
+          Diabetes: '0', Depression: '0', Stroke: '0', CholesterolTriglycerides: 200,
+          UPDRS: 50, MoCA: 25, FunctionalAssessment: 80, Tremor: '1', Rigidity: '0',
+          Bradykinesia: '1', PosturalInstability: '0', SpeechProblems: '0',
+          SleepDisorders: '1', Constipation: '0', BP_Diff: 10, Cholesterol_Ratio: 4,
+          LDL_to_HDL: 2,
+        },
+        negative: {
+          Age: 68, Gender: 'Male', Ethnicity: 'Asian', EducationLevel: 'HighSchool',
+          BMI: 39, Smoking: 'No', AlcoholConsumption: 'Moderate',
+          PhysicalActivity: 'High', DietQuality: 'Average', SleepQuality: 'Average',
+          FamilyHistoryParkinsons: '0', TraumaticBrainInjury: '0', Hypertension: '0',
+          Diabetes: '1', Depression: '0', Stroke: '0', CholesterolTriglycerides: 180,
+          UPDRS: 30, MoCA: 28, FunctionalAssessment: 90, Tremor: '0', Rigidity: '0',
+          Bradykinesia: '0', PosturalInstability: '0', SpeechProblems: '0',
+          SleepDisorders: '0', Constipation: '0', BP_Diff: 5, Cholesterol_Ratio: 3,
+          LDL_to_HDL: 1,
+        }
+      };
+
+      const data = values[type];
+      for (const [key, value] of Object.entries(data)) {
+        const elements = document.getElementsByName(key);
+        if (elements.length > 0) {
+          elements[0].value = value;
+        }
+      }
+    }
+
+    function fillRandom() {
+      const form = document.getElementById("diagnosisForm");
+      const fields = {
+        Age: [50, 90],
+        Gender: ['Female', 'Male', 'Other'],
+        Ethnicity: ['White', 'Black', 'Asian', 'Hispanic', 'Other'],
+        EducationLevel: ['HighSchool', 'Bachelors', 'Masters', 'PhD', 'Other'],
+        BMI: [18, 45],
+        Smoking: ['Yes', 'No'],
+        AlcoholConsumption: ['None', 'Low', 'Moderate', 'High'],
+        PhysicalActivity: ['Low', 'Moderate', 'High'],
+        DietQuality: ['Poor', 'Average', 'Good'],
+        SleepQuality: ['Poor', 'Average', 'Good'],
+        FamilyHistoryParkinsons: ['0', '1'],
+        TraumaticBrainInjury: ['0', '1'],
+        Hypertension: ['0', '1'],
+        Diabetes: ['0', '1'],
+        Depression: ['0', '1'],
+        Stroke: ['0', '1'],
+        CholesterolTriglycerides: [100, 300],
+        UPDRS: [0, 100],
+        MoCA: [0, 30],
+        FunctionalAssessment: [0, 100],
+        Tremor: ['0', '1'],
+        Rigidity: ['0', '1'],
+        Bradykinesia: ['0', '1'],
+        PosturalInstability: ['0', '1'],
+        SpeechProblems: ['0', '1'],
+        SleepDisorders: ['0', '1'],
+        Constipation: ['0', '1'],
+        BP_Diff: [0, 50],
+        Cholesterol_Ratio: [1, 10],
+        LDL_to_HDL: [0, 5],
+      };
+
+      for (const key in fields) {
+        const valRange = fields[key];
+        let val;
+        if (Array.isArray(valRange)) {
+          val = valRange[Math.floor(Math.random() * valRange.length)];
+        } else {
+          const [min, max] = valRange;
+          val = Math.floor(Math.random() * (max - min + 1)) + min;
+          if (key === "Gender" || key === "Ethnicity" || key === "EducationLevel") {
+            val = valRange[Math.floor(Math.random() * valRange.length)];
+          }
+        }
+        if (form.elements[key]) form.elements[key].value = val;
+      }
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("dark-mode");
+    }
+  </script>
+</body>
+</html>
